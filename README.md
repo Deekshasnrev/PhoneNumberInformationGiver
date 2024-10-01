@@ -38,5 +38,5 @@ These instructions will help you set up the project on your local machine for de
 
 1. **Clone the repository** to your local machine using Git:
    ```bash
-   git clone https://github.com/username/repository-name.git
+   git clone https://github.com/Deekshasnrev/PhoneNumberInformationGiver.git
    cd repository-name
