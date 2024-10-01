@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Load the CSS for the starry background -->
+    <link rel="stylesheet" href="{% static 'phoneapp/css/stars.css' %}">
+</head>
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+     </div>
+
+    <div class="result">
+        <h1 class="text-center">Phone Number Info</h1>
+        <h4 class="text-center"> You can get Information about the Number you Enter</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="phone_number">Enter your number with country code (+__):</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="+1234567890" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Get Info</button>
+        </form>
+        
+        {% if number_info %}
+        <div >
+            {% if number_info.error %}
+            <div class="alert alert-danger">
+                {{ number_info.error }}
+            </div>
+            {% else %}
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Phone:</strong> {{ number_info.phone }}</li>
+                <li class="list-group-item"><strong>Time Zones:</strong> {{ number_info.time_zones }}</li>
+                <li class="list-group-item"><strong>Carrier:</strong> {{ number_info.carrier }}</li>
+                <li class="list-group-item"><strong>Region:</strong> {{ number_info.region }}</li>
+            </ul>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Ensure the starry background takes effect -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
